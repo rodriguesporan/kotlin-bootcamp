@@ -1,30 +1,31 @@
 import java.util.*
 
 fun main(args: Array<String>) {
-    var fortune: String
-    for (i in 1..10) {
-        fortune = getFortuneCookie()
-        println("Your fortune is: ${fortune}")
-        if (fortune == "Take it easy") break
-    }
+    println("Hello ${args[0]}")
+    feedTheFish()
 }
 
-fun getFortuneCookie(): String {
-    val fortunes = listOf(
-        "You will have a great day!",
-        "Things will go well for you today.",
-        "Enjoy a wonderful day of success.",
-        "Be humble and all will turn out well.",
-        "Today is a good day for exercising restraint.",
-        "Take it easy and enjoy life!",
-        "Treasure your friends because they are your greatest fortune.",
-    )
+fun feedTheFish() {
+    val day = randomDay()
+    val food = fishFood(day)
+    println("Today is $day and the fish eat $food")
+}
 
-    println("Enter your birthday: ")
+fun randomDay() : String {
+    val week = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
-    var birthday = readLine()
-    birthday = "27"
-    var birthdayInt = birthday?.toIntOrNull() ?: 1
-    return fortunes[birthdayInt.rem(fortunes.size)]
+    return week[Random().nextInt(7)]
+}
 
+fun fishFood(day: String) : String {
+    return when (day) {
+        "Monday" -> "flakes"
+        "Tuesday" -> "pellets"
+        "Wednesday" -> "redworms"
+        "Thursday" -> "granules"
+        "Friday" -> "mosquitoes"
+        "Saturday" -> "lettuce"
+        "Sunday" -> "plankton"
+        else -> "fasting"
+    }
 }
